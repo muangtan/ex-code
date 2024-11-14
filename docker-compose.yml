@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx_server
+    ports:
+      - "8000:80"
+      - "4430:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf  # แผนที่ไฟล์ config Nginx จากเครื่องเรา
+      - ./html:/usr/share/nginx/html         # แผนที่โฟลเดอร์ HTML ของเว็บไซต์
+      - ./logs:/var/log/nginx                # แผนที่โฟลเดอร์ logs
+    networks:
+      - webnet
+
+networks:
+  webnet:
+    driver: bridge
